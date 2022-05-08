@@ -713,25 +713,26 @@ SL
 ;	PROC
 .local
 ;
-	CPX	#0	;TRACK 0?
-	BEQ	?SL001	;YES CHECK FOR SECTOR 1->3
+;	CPX	#0	;TRACK 0?
+;	BEQ	?SL001	; YES CHECK FOR SECTOR 1->3 <- skipped, e474 change to compatibility with other
+				; Double Density format routines	
 ?SL002	LDA	#01
 	LDY	#$00
 	STA	(BPNT),Y
 	JSR	IBPNT
 	LDA	#$00	;SECTOR LENTH 256
-	BEQ	?SLXIT	;LEAVE
+;	BEQ	?SLXIT	;LEAVE
 ;
-?SL001	CMP	#4	;SECTOR >= 4?
-	BCS	?SL002	;YES
+;?SL001	CMP	#4	;SECTOR >= 4?
+;	BCS	?SL002	;YES
 ;
 ;OK, THIS ONE IS 128 BYTES LONG
 ;
-	LDA	#0
-	TAY
-	STA	(BPNT),Y
-	JSR	IBPNT
-	LDA	#$80	;128 TO SEND BACK
+;	LDA	#0
+;	TAY
+;	STA	(BPNT),Y
+;	JSR	IBPNT
+;	LDA	#$80	;128 TO SEND BACK
 ?SLXIT	RTS
 ;	EPROC
 ;
